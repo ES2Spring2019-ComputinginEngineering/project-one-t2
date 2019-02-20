@@ -21,15 +21,27 @@ def system_update(T, acc_t, vel_t, theta, t1, t2):
     theta = theta_max * (math.sin( math.sqrt(g / L))) * dt
     acc_t = (g * math.sin(math.radians(theta))) / m
     vel_t = math.sqrt(2 * g * L * (1 - (math.cos(theta_r))))
+    return theta, vel_t, acc_t
 
 
-def update_system(T, acc_t, vel_ t, theta):
+def print_system(T, acc_t, vel_t, theta):
     print("TIME:        ", T)
     print("POSITION:    ", theta)
-    print("VELOCITY:    ", vel_t,  "\n")
+    print("VELOCITY:    ", vel_t)
+    print("ACCEL:       ", acc_t,  "\n")
 
 
-    #initial conditions
+#initial conditions
 theta = [0]
 vel_t = [0]
-acc_t = [0, 4.9, 6.9, 8.49, 9.8, 9.8, 8.49, 6.9, 4.9, 0,
+acc_t = [0, 4.9, 6.9, 8.49, 9.8, 9.8, 8.49, 6.9, 4.9, 0, -4.9, -6.9, -8.49, -9.8, -9.8, -8.49, -6.9, -4.9, 0]
+T = np.linspace(0, 20, 21)
+print_system(T[0], theta[0], vel_t[0], acc_t[0])
+
+i = 1
+while i < len(T):
+    theta, vel_t = system_update(acc_t[i], theta[i-1], vel_t[i-1], T[i-1], T[i])
+    theta.append(theta)
+    vel_t.append(vel_t)
+    print_system(T[i], theta[i], vel_t[i])
+    i += 1
