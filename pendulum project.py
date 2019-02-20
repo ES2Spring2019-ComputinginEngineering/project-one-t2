@@ -10,7 +10,7 @@ import numpy as np
 L = .12 #m
 g = 9.8 #m/s^2
 m = 0.5 #kg
-theta_max = 180 #degrees
+theta_max = 90 #degrees
 theta = 172
 theta_r = math.radians(theta)
 
@@ -23,3 +23,13 @@ def system_update(T, acc_t, vel_t, theta, t1, t2):
     vel_t = math.sqrt(2 * g * L * (1 - (math.cos(theta_r))))
 
 
+def update_system(T, acc_t, vel_ t, theta):
+    print("TIME:        ", T)
+    print("POSITION:    ", theta)
+    print("VELOCITY:    ", vel_t,  "\n")
+
+
+    #initial conditions
+theta = [0]
+vel_t = [0]
+acc_t = [0, 4.9, 6.9, 8.49, 9.8, 9.8, 8.49, 6.9, 4.9, 0,
