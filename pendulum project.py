@@ -12,7 +12,7 @@ g = 9.8 #m/s^2
 m = 0.5 #kg
 
 def system_update(x_initial, omega_initial, time1, time2):
-    #return updated values of period, acceleration, ang velocity, angular position
+    #return updated values of period, acceleration, and velocity, angular position
     dt = time2 - time1
     T = (2 * np.pi) * (np.sqrt(L / g))
     omega = omega_initial * math.cos(math.sqrt(g / L) * dt )
@@ -25,15 +25,10 @@ def print_system(time, x_initial, omega_initial):
     print("ANGLE:   ", omega_initial,  "\n")
 
 #initial conditions
-x_initial = [0]
+x_initial = [math.pi]
 array_x = np.array(x_initial)
 omega_initial = [0, math.pi/2, 20, 30, 40, math.pi / 3, math.pi / 4, math.pi / 6, math.pi]
 time = np.linspace(0, 20, 21)
-
-#vel_t = [0]
-#acc_t = [0, 4.9, 6.9, 8.49, 9.8, 9.8, 8.49, 6.9, 4.9, 0, -4.9, -6.9, -8.49, -9.8, -9.8, -8.49, -6.9, -4.9, 0]
-
-
 print_system(time[0], x_initial[0], omega_initial[0])
 
 i = 1
