@@ -18,7 +18,7 @@ def system_update(omega_initial, theta_initial, theta_t, time1, time2):
     dt = time2 - time1
     theta = theta_initial + omega_initial * dt
     acc_initial = (-g / L * math.sin(omega_initial) )
-    omega = omega_initial + acc_initial * dt
+    omega = omega_initial + (acc_initial * dt)
     acc_t = ((-1 * g) / L ) * math.sin(theta)
     return theta, acc_t, omega
 
@@ -31,7 +31,7 @@ def print_system(time, omega_initial, acc_initial, theta_initial):
 
 #initial conditions
 theta_initial = [math.pi]
-omega_initial = [0]
+omega_initial = [5]
 acc_initial = [0]
 time = np.linspace(0, 20, 100)
 print_system(time[0], omega_initial[0], acc_initial[0], theta_initial[0])
