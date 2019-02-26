@@ -24,19 +24,21 @@ def calculate_angle(x,y,z):
 a = 0
 while True:
     if a == 0:
-        if microbit.button_a.was_pressed():
-            while not microbit.button_b.was_pressed():
-                microbit.display.show(microbit.Image.ARROW_E)
-                time0 = microbit.running_time()
-                x = microbit.accelerometer.get_x()
-                y = microbit.accelerometer.get_y()
-                z = microbit.accelerometer.get_z()
-                x_angle = calculate_angle(x,y,z)
-                y_angle = calculate_angle(y,x,z)
-                print(time0)
-                print(y_angle)
+        with open("data.txt.", "w") as my_file:
+            if microbit.button_a.was_pressed():
+                while not microbit.button_b.was_pressed():
+                    microbit.display.show(microbit.Image.ARROW_E)
+                    time0 = microbit.running_time()
+                    x = microbit.accelerometer.get_x()
+                    y = microbit.accelerometer.get_y()
+                    z = microbit.accelerometer.get_z()
+                    x_angle = calculate_angle(x,y,z)
+                    y_angle = calculate_angle(y,x,z)
+                    print(time0)
+                    print(y_angle)
+my_file.write(time0)
+my_file.write(y_angle)
 
 
-with open("data.txt.", "w+") as my_file:
-    my_file.write(time0)
-    my_file.write(y_angle)
+
+
