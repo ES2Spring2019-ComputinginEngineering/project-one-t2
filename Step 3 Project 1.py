@@ -35,7 +35,8 @@ while True:
                 print(time0)
                 print(y_angle)
                 my_file.write(str(time0) + "\n")
-                my_file.write( str(y_angle) + "\n")
+                my_file.write(str(y_angle) + "\n")
+
 
 
 
