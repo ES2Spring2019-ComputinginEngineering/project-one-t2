@@ -34,10 +34,14 @@ def time_and_angle_data():
             a.append(num)
         i += 1
     fin.close()
-    print(a)
-    print(t)
+    #return a , t
+    print("Angle=", a)
+    print("Time=", t)
 
 
+#Graph acceleration vs time:
+
+#Plug in acceleration into
 
 
 
