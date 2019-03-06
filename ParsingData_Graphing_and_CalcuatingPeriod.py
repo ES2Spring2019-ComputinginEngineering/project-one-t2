@@ -2,14 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.signal as sig
 
-
+#Opening file containing experiment data
 fin = open('/Users/ammaagyei/mu_code/Experiment1.txt')
 mytxt = fin.read()
 print(mytxt)
+
+
+#Splitting data on file into acceleration list, angular position list and time list
 t = []
 acc = []
 ang = []
-
 i = 0
 line = ""
 data = []
@@ -29,6 +31,7 @@ for num in data:
     i += 1
 fin.close()
 
+#Plotting Acceleration vs Time
 plt.figure(figsize=(8,8))
 plt.subplot(3,1,2)
 plt.plot(t, acc, 'k-')
@@ -39,6 +42,8 @@ plt.ylabel('acceleration(m/s**2)')
 plt.title("Acceleration vs Time")
 plt.grid()
 
+
+#Plotting Angle vs Time
 plt.figure(figsize=(8,8))
 plt.subplot(3,1,2)
 plt.plot(t, ang, 'k-')
@@ -49,29 +54,37 @@ plt.ylim(-8,2)
 plt.title("Theta vs Time")
 plt.grid()
 
+
+#Graphing filtered data and finding peaks
 ang = np.radians(ang)   
 acc = np.array(acc)
 t = np.array(t)
 acc_filt = sig.medfilt(acc,33)
-acc_pks,_ = sig.find_peaks(acc,10)
+acc_pks,_ = sig.find_peaks(acc,10,prominence=200)
 acc_filt_pks, _ = sig.find_peaks(acc_filt,None,None)
 
+#Plotting Noisy Data
 plt.figure()
 plt.plot(t,acc, 'r-', t[acc_pks],acc[acc_pks], 'b.')
 plt.title('Noisy Data')
 plt.show()
 
+#Plotting Filtered Data
 plt.figure(figsize=(10,10))
 plt.plot(t, acc_filt, 'r-',t[acc_filt_pks],acc_filt[acc_filt_pks], 'b.')
 plt.title('Filtered Data')
 plt.show()
 
-t.resize((12,),refcheck = False)
+
+#Plotting Peaks vs Time and Calculating the Period
+newt = t[acc_filt_pks]
+newacc= acc[acc_filt_pks]
+t.resize((9,),refcheck = False)
 plt.figure()
-plt.plot(t, acc_filt_pks, 'ro-')
+plt.plot(newt, newacc, 'ro-')
 plt.title('Peaks Vs Time')
 plt.show()
 
-
-mean_T = acc_filt_pks.mean()  #Period
+#Calculating the period
+mean_T = newt.mean() 
 T = mean_T
