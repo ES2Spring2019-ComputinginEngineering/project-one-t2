@@ -61,7 +61,7 @@ acc = np.array(acc)
 t = np.array(t)
 acc_filt = sig.medfilt(acc,33)
 acc_pks,_ = sig.find_peaks(acc,10,prominence=200)
-acc_filt_pks, _ = sig.find_peaks(acc_filt,None,None)
+acc_filt_pks, _ = sig.find_peaks(acc_filt,None,None,prominence=20)
 
 #Plotting Noisy Data
 plt.figure()

@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import time
 import scipy.signal as sig
 
-
 #Global Variables
 L = 0.56 #m
 g = -9.8 #m/s^2
@@ -79,15 +78,16 @@ plt.grid()
 
 
 #finding peaks
-theta_initial = np.radians(theta_initial)   
-acc_initial = np.array(acc_initial)
-t = np.array(time)
+theta_initial = np.radians(theta_initial)     #converts theta into radians
+acc_initial = np.array(acc_initial)           #creates an array for acceleration
+t = np.array(time)                            #creates an array for time
 t = t
 
-acc_pks,_ = sig.find_peaks(acc_initial,2,3,10)
-acc_filt = sig.medfilt(acc_initial,5)
+acc_pks,_ = sig.find_peaks(acc_initial,2,3,10)           #finds peaks within the window provided
+acc_filt = sig.medfilt(acc_initial,5)                     #filters noisy data
 acc_filt_pks, _ = sig.find_peaks(acc_filt,1,None,7)
 
+#Plotting of Noisy Data
 plt.figure()
 plt.plot(t,acc_initial, 'r-', t[acc_pks],acc_initial[acc_pks], 'b.')
 plt.xlabel('Time(seconds)')
@@ -95,6 +95,8 @@ plt.ylabel('acceleration(m/s**2)')
 plt.title('Noisy Data')
 plt.show()
 
+
+#Plotting of Filtered Data
 plt.figure()
 plt.plot(t, acc_filt, 'r-',t[acc_filt_pks],acc_filt[acc_filt_pks], 'b.')
 plt.xlabel('Time(seconds)')
@@ -102,17 +104,11 @@ plt.ylabel('acceleration(m/s**2)')
 plt.title('Filtered Data')
 plt.show()
 
-plt.figure()
-plt.plot(t, acc_filt, 'r-',t[acc_filt_pks],acc_filt[acc_filt_pks], 'b.')
-plt.xlabel('Time(seconds)')
-plt.ylabel('acceleration(m/s**2)')
-plt.title('Filtered Data')
-plt.show()
-
+#Plotting peaks over time in order to calculate the period
 newt = t[acc_filt_pks]
 newacc = acc_initial[acc_filt_pks]
+t.resize((17,),refcheck = False)    #resizes the array so that they match
 
-t.resize((17,),refcheck = False)
 plt.figure()
 plt.plot(newt, newacc, 'ro-')
 plt.xlabel('Time(seconds)')
@@ -120,6 +116,6 @@ plt.ylabel('acceleration(m/s**2)')
 plt.title('Peaks Vs Time')
 plt.show()
 
-
+#Finding the mean period to calculate the period
 mean_Period = newt.mean()
 print(mean_Period)
