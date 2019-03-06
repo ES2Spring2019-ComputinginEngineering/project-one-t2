@@ -25,7 +25,7 @@ def calculate_angle(x,y,z):
 
 while True:
     if microbit.button_a.was_pressed():
-        with open('Experiment5.txt', 'w') as my_file:
+        with open('Experiment1.txt', 'w') as my_file:
             while not microbit.button_b.was_pressed():
                 microbit.display.show(microbit.Image.ARROW_E)
                 time0 = microbit.running_time()
