@@ -1,19 +1,18 @@
 # pendulum project
 # Amma Agyei and Tina Guo
 
-#model a pendulum using legos and microbit
-#use physics equations to determine period(T) and angular velocity(v)
-
+#Import Statements
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-L = 1 #m
-g = 9.8 #m/s^2
+#Global Variables
+L = 0.025 #m
+g = -9.8 #m/s^2
 m = 0.5 #kg
 
-
+#Functions
 def system_update(omega_initial, theta_initial, acc_initial, time1, time2):
     #return updated values of period, acceleration, and velocity, angular position
     dt = time2 - time1
@@ -32,7 +31,7 @@ def print_system(omega_initial, acc_initial, theta_initial):
 theta_initial = [math.pi / 6]
 omega_initial = [0]
 acc_initial = [-4.9]
-time = np.linspace(0, 20, 20000)
+time = np.linspace(0, 20, 60)
 print_system(omega_initial[0], acc_initial[0], theta_initial[0])
 
 i = 1
@@ -41,10 +40,10 @@ while i < len(time):
     omega_initial.append(omega)
     theta_initial.append(theta)
     acc_initial.append(acc_t)
-    #print_system(omega_initial[i], acc_initial[i], theta_initial[i])
     i += 1
-    
 
+
+#Plots acceleration vs time on graph
 plt.figure(figsize=(8,4),dpi=100)
 plt.subplot(3,1,2)
 plt.plot(time,acc_initial, 'ro--')
@@ -53,6 +52,8 @@ plt.ylabel('acceleration(m/s**2)')
 plt.xlim((0,20))
 plt.grid()
 
+
+#Plots velocity vs time on graph
 plt.figure(2)
 plt.subplot(3,1,2)
 plt.plot(time,omega_initial, 'ro--')
@@ -61,6 +62,8 @@ plt.ylabel('velocity(m/s)')
 plt.xlim((0,20))
 plt.grid()
 
+
+#Plots position vs time on graph
 plt.figure(3)
 plt.subplot(3,1,2)
 plt.plot(time,theta_initial, 'ro--')
@@ -68,4 +71,3 @@ plt.xlabel('Time(seconds)')
 plt.ylabel('position(m)')
 plt.xlim((0,20))
 plt.grid()
-
