@@ -11,10 +11,12 @@ import math
 import os
 
 #Comma-Separated Values
-
+#22.1 INCHES == EXPERIMENT 1
+#11.5 INCHES == EXPERIMENT 2
+#13.8 INCHES -- EXP 3
+#16.5INCHES--- EXP 4
+#19 inches --- Experment 5
 time0 = 0
-time1 = 0
-elapsed_time = time1 - time0
 
 def calculate_angle(x,y,z):
         a1 = math.atan2(x, math.sqrt((y**2) + (z**2 )))
@@ -23,7 +25,7 @@ def calculate_angle(x,y,z):
 
 while True:
     if microbit.button_a.was_pressed():
-        with open('time_and_acceleration_data.txt', 'w') as my_file:
+        with open('Experiment5.txt', 'w') as my_file:
             while not microbit.button_b.was_pressed():
                 microbit.display.show(microbit.Image.ARROW_E)
                 time0 = microbit.running_time()
@@ -33,25 +35,8 @@ while True:
                 x_angle = calculate_angle(x, y, z)
                 y_angle = calculate_angle(y, x, z)
                 print(time0)
-                print(y)
+                print(y_angle)
                 my_file.write(str(time0) + "\n")
-                my_file.write(str(y) + "\n")
-
-
-"""while True:
-    if microbit.button_a.was_pressed():
-        with open('time_and_angle_data.txt', 'w') as my_file:
-            while not microbit.button_b.was_pressed():
-                microbit.display.show(microbit.Image.ARROW_E)
-                time0 = microbit.running_time()
-                x = microbit.accelerometer.get_x()
-                y = microbit.accelerometer.get_y()
-                z = microbit.accelerometer.get_z()
-                x_angle = calculate_angle(x, y, z)
-                y_angle = calculate_angle(y, x, z)
-                print(time0)
-                print(y)
-                my_file.write(str(time0) + "\n")
-                my_file.write(str(y_angle) + "\n")"""
+                my_file.write(str(y)+ "," + str(y_angle) + "\n")
 
 
